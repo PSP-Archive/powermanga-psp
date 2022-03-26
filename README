@@ -1,0 +1,32 @@
+Powermanga is an arcade 2D shoot-em-up game with 41 levels and more 
+than 200 sprites. It runs in 320x200 or 640x400 pixels, 
+with Window mode or full screen 
+and support for 8, 15, 16, 24, and 32 bpp. 
+
+PREREQUISITES
+
+  You need:
+  - A 386 platform or a PowerPC platform
+  - 32MB RAM and 80MB swap
+  - Linux 2.x 
+  - XFree86 3.3.x or better
+  - SDL 1.2
+  - SDL_mixer
+  - the GCC C++ compiler
+  - GNU make
+  - (X11 with the MIT-SHM extension headers)
+  - (LinuxThreads)
+
+COMPILING AND INSTALLING
+
+
+  To install in /usr/local :
+
+       ./configure
+        make
+        su -c 'make install'
+
+LEGAL
+
+  Powermanga is copyright TLK Games 1998-2005 and available under the
+  terms of the GNU General Public License. See COPYING for details.

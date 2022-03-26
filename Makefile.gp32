@@ -1,0 +1,79 @@
+#
+# PowerManga GP2X make file
+#
+
+CROSS_COMPILE = /usr/local/gp2xdev/bin/gp2x-
+
+SDL_CFLAGS = `/usr/local/gp2xdev/bin/sdl-config --cflags`
+SDL_LIBS = `/usr/local/gp2xdev/bin/sdl-config --libs`
+
+CXX = $(CROSS_COMPILE)g++
+LD = $(CROSS_COMPILE)ld
+STRIP = $(CROSS_COMPILE)strip
+
+CXXFLAGS := -Wall -Wshadow -O2 -mcpu=arm920 -mtune=arm920t -fstrict-aliasing -D_GP2X
+CXXFLAGS += -I/usr/local/gp2xdev/include/ $(SDL_CFLAGS) $(DEFINES)
+LIBS := -lSDL_mixer -lmad -lvorbisidec
+
+TARGET = powermanga.gpe
+SRC = afficheEtoiles.cpp \
+	bonus.cpp \
+	caractere.cpp \
+	chaine.cpp \
+	congratulations.cpp \
+	configfile.cpp \
+	courbe.cpp \
+	displayFonte.cpp \
+	eclairExecution.cpp \
+	ennemis_execution.cpp \
+	etbfonte1.cpp \
+	explosionExecution.cpp \
+	fntscrol.cpp \
+	gardien12.cpp \
+	gardien13.cpp \
+	gardien14.cpp \
+	gardiens.cpp \
+	gfxbase.cpp \
+	grille.cpp \
+	initialiseGameOver.cpp \
+	inits_game.cpp \
+	keymap.cpp \
+	lispreader.cpp \
+	list.cpp \
+	linuxroutines.cpp \
+	main.cpp \
+	menu.cpp \
+	metors.cpp \
+	onde.cpp \
+	options.cpp \
+	playanim.cpp \
+	powermanga.cpp \
+	powmangasub1.cpp \
+	powmangasub2.cpp \
+	score.cpp \
+	sdl_mixer.cpp \
+	sdl_tlk.cpp \
+	special_enemy.cpp \
+	tirsExecutions.cpp \
+	tirsJoueur.cpp \
+	touchesTriches.cpp \
+	vaisseau.cpp \
+	xwindow.cpp \
+	gfxroutines.cpp
+
+all : $(TARGET)
+
+OBJS = $(SRC:.cpp=.o)
+DEPS = $(SRC:.cpp=.d)
+
+$(TARGET): $(OBJS)
+	$(CXX) $(LDFLAGS) -static -s -lm -o $@ $(OBJS) $(LIBS) $(SDL_LIBS)
+	$(STRIP) $(TARGET)
+
+.cpp.o:
+	$(CXX) $(CXXFLAGS) -MMD -c $< -o $*.o
+
+clean:
+	rm -f $(TARGET) *.o *.d
+
+-include $(DEPS)
